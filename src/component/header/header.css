@@ -1,0 +1,11 @@
+* {
+    box-sizing: border-box;
+}
+
+.colorChange {
+    background-color: rgb(234 87 87) !important;
+}
+
+.nav_item:hover {
+    color: white !important;
+}

@@ -1,0 +1,84 @@
+import { useState, useEffect } from "react";
+import axios from "axios";
+import { useParams } from "react-router-dom";
+
+export default function Bookdetail() {
+    // const parameter = useParams()
+    const { book_code } = useParams()
+    const API_URL = process.env.REACT_APP_API_URL
+    const [book, setBook] = useState([])
+
+    useEffect(() => {
+        getBook()
+    }, [])
+
+    const getBook = async () => {
+        axios.get(API_URL + "v1/guest/book-detail/" + book_code).then((response) => {
+            setBook(response.data)
+        }).catch((error)=>{
+            console.log(error.response.data.message);
+        })
+    }
+
+    return <div key={book.id} className='book_box'>
+        <h3>Title : {book.title}</h3>
+        <h3>Author : {book.author}</h3>
+        <h3>Book_code : {book.book_code}</h3>
+        <h3>Difficulty : {book.difficulty}</h3>
+        <h3>Description : </h3>
+        <h5>{book.description}</h5>
+        <h3>Sample_text : </h3>
+        <h5>{book.sample_text}</h5>
+        <img className="book_image" src={book.image_path} alt="" />
+    </div>
+}
+
+
+
+
+
+
+
+
+
+
+"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiNWM1MWE1MTZlYzViOGE3ZThmZDRmZGE4YjM5Nzk2Mjg5ODc4MGQ3ODA3OWZhZDIxZWYwNDNkNjI4Y2E4OTJkNDAzMDdhYWY2YWY1ODQ2MzMiLCJpYXQiOjE2NTIzNTgwNjAuOTM3NjAyMDQzMTUxODU1NDY4NzUsIm5iZiI6MTY1MjM1ODA2MC45Mzc2MDYwOTYyNjc3MDAxOTUzMTI1LCJleHAiOjE2ODM4OTQwNjAuOTMzMTk3MDIxNDg0Mzc1LCJzdWIiOiIyIiwic2NvcGVzIjpbXX0.IvGHPUkxynBEOTvPj1HuC1p8qbtEMcctkTjAbxNa_qbffGLdDzei0PtOZu7PqrXafnnXqCyH5jOYhKgsK5LBcRVNjB3CU7KX9yyVND5WZhEM_kK8ty7H5W091x1GhYlg4-K7epByQ6nE8qaTBuGKs1CIf96bCyNmTKedeaj_NbtlNLwgvxnrH8FCrHzzdJW5SjdzHWNmX90LD_nIp84_yWHW-dcu9ZmfibpDqXW-ODetI7bPFtc5kbMOTjTmHPGX8rBwfzEM5UGtHDqhhZ5Kpdod1MUC9Z4s5YE7BWp-JhtXaG9NfvkuAV7mPS0AdckgtgCu4SGtEMfMfpJcQO_V9EbSNg-nk2M0iTXcII2EbzJOAb7Y5s_dSgW8-oFXVM4od1d0xetJFikjrVVudTw0ny3ao4PHeqfR3MMNrtsrSQqvKxtx0_eaMtno8Ou4dHydBxT9P6ICiogEZ-WAZO9QZBmk0d71a1bv-518qGVvTwwcfRU7zmF7B2QXDkd-4mpgpmIAQahqzMwxDVaozdEq3m-4VRXhwhJSSf2lhzXEMg518STQy64N-hwK-YJjhe1SfBew3HtTM9lqZNYX4WPyGUY_bMSenaPuC1awM6i86x1_kQ_u0xO2Gtvq-PaSwL3ZBtnY0PsJcKRZsPr_lR2Y_M18EXgu_YOtNinATnBKrgg"
+
+
+"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiMmVkYzBjMGMxMTQwY2YxMzFlYzJhMzFmNmI0NmRiM2NhZmYxOWVlZWIxZDY2MTdhZDVkNTFhY2QwY2Y5NzM0NzQ1ZmY0ODQwZmFiYjc3NGUiLCJpYXQiOjE2NTIzNTgxOTQuODQwMTg2MTE5MDc5NTg5ODQzNzUsIm5iZiI6MTY1MjM1ODE5NC44NDAxODk5MzM3NzY4NTU0Njg3NSwiZXhwIjoxNjgzODk0MTk0LjgzNjIzMTk0Njk0NTE5MDQyOTY4NzUsInN1YiI6IjEiLCJzY29wZXMiOltdfQ.M38sPwdKP2Qd9cVOr-BQIxcti6Tv6QMt8tOxYHhHqzzNuysDzDQxaDEZJhybYRWPDIdMRlldk4UanBuCnzl-fWRVf2e5I3OetHN7FMRTDc_hCgN_DB5MA9Ls8XoH9eLeeayJp-KD8kn_Z9S-DLL9l5o8fJ-PpKFv08D8QVLAHOKmM5b8x1sHnBXGoJzn9EyoKwtLu2O72oqagRQtDPDl53B5f2JIIZ317kUUeghCTxZSu0IcruveBsLNA9DZA4bplnG34gdhmM050HCnFz1SmP1Dl5ci9WYKGHTVB-zxSnNYZLa4LVYB-rwZ6ym8Jzi1YvvU6pra13gb4tKFOCFU7Nz46J_UlXhSdwTuL_O0aSu5LIfmO3vpR_RvtV0QKOjmdM4poTTTa6yMgFdoIDoQek53nLWSnGp753pP6C_EsCsDZfvEi2twPiVBbNeoIpIa47HViQyf2gpRtvJMOjZt2CVtL24McKuMguKNSvIhnXIWyrg2vBzIZXycqdq6KGpvsPf-XeH7BeEAyhiR2EDggZJPxRWo6lo8APRKhQp1hvJ4gaZ4WWjXyo1he0TJdZCW7-ezF3zBYyiNN7NiNiwuKMf4QWiLELfGh4fKpNW2AWKVtoLytUWNzfLo2ta_pQzJKfPS0qm_MnPsLLRByStW3DDVTJXOtQcY5EmIOYzAEJc"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+setAbc(bookdetail)
+setbc(URL.createObjectURL(bookdetail.bookImage[0]))
+;
+
+
+const [abc, setAbc] = useState()
+const [bc, setbc] = useState()
+
+
+
+
+
+
+useEffect(()=>{
+    console.log(abc);
+    console.log(bc);
+  })
